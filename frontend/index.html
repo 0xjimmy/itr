@@ -1,0 +1,181 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>iTR Website Concept</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/unicons.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <!-- MENU -->
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class='uil uil-exchange'></i><span class="uil">iTR</span></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link"><span data-hover="About">Trade</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#project" class="nav-link"><span data-hover="Projects">Token</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#resume" class="nav-link"><span data-hover="Resume">About</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link"><span data-hover="Contact">Contracts</span></a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-lg-auto">
+                    <div class="ml-lg-4">
+                      <div class="color-mode d-lg-flex justify-content-center align-items-center">
+                        <i class="color-mode-icon"></i>
+                        <span>Color mode</span>
+                      </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ABOUT -->
+    <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                    <div class="about-text">
+                        <small class="small-text">Welcome to <span class="mobile-block">iTrade</span></small>
+                        <h1 class="animated animated-text">
+                            <span class="mr-2">Trade </span>
+                                <div class="animated-info">
+                                    <span class="animated-item">Silver</span>
+                                    <span class="animated-item">iTR</span>
+                                </div>
+                        </h1>
+
+                        <p>Trade Silver derivatives with iTR Contract Tokens.</p>
+                        
+                        <div class="custom-btn-group mt-4">
+                          <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Trade Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-12 col-12 grey-card">
+                    <p>Placeholder for Asset Price</p>
+                    <p>Placeholder for iTR Holdings</p>
+                    <p>Placeholder for unrealized profit/loss</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CHART -->
+    <section class="py-5">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2>Price Chart</h2>
+        <br>
+      </div>
+      <div class="chart-div">
+        <div class="tradingview-widget-container">
+            <div id="tradingview_d98dd"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/FX_IDC-XAGUSD/" rel="noopener" target="_blank"><span class="blue-text">XAGUSD Chart</span></a> by TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                new TradingView.widget(
+                {
+                "autosize": true,
+                "symbol": "FX_IDC:XAGUSD",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "Light",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "withdateranges": true,
+                "container_id": "tradingview_d98dd"
+              }
+                );
+            </script>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ORDER -->
+    <section class="contact py-5" id="contact">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-lg-5 mr-lg-5 col-12" style="margin: auto">
+            <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
+                <div class="contact-form contact-info-item">
+                  <h3 class="mb-3 text-white">Long Silver</h3>
+                  <div>
+                    <input type="text" class="form-control" name="name" placeholder="Amount to long (Oz)" id="longAmount">
+                    <input type="text" class="form-control" name="name" disabled placeholder="ETH Cost" id="longCost">
+                    <br>
+                    <input type="submit" class="form-control submit-btn" value="Create Long Contract">
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5 mr-lg-5 col-12" style="margin: auto">
+              <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
+                  <div class="contact-form contact-info-item">
+                    <h3 class="mb-3 text-white">Long Silver</h3>
+                    <div>
+                      <input type="text" class="form-control" name="name" placeholder="Amount to short (Oz)" id="shortAmount">
+                      <input type="text" class="form-control" name="name" disabled placeholder="ETH Cost" id="shortCost">
+                      <br>
+                      <input type="submit" class="form-control submit-btn" value="Create Short Contract">
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+     <footer class="footer py-5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-lg-12 col-12">                                
+                        <p class="copyright-text text-center">Copyright &copy; 2019 iTR . All rights reserved</p>
+                        <p class="copyright-text text-center">Built by <a rel="nofollow" href="https://decentralised.tech/" target="_blank">DecentralisedTech</a></p>
+                    </div>
+                    
+               </div>
+          </div>
+     </footer>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/darkmode.js"></script>
+  </body>
+</html>
