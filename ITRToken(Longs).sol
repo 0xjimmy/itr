@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity ^0.5.11;
 
 interface IERC20 {
   function totalSupply() external view returns (uint256);
@@ -111,16 +111,14 @@ contract Token is IERC20, Owned {
     // Constructor - Sets the token Owner
     constructor() public {
         owner = 0x07FeABAe79a8fFA1028354Aefa46D1771a18D126;
-        _balances[0xAd7195E2f5E4F104cC2Ed31Cb719EfD95b9Eb490] = supply;
-        emit Transfer(address(0), 0xAd7195E2f5E4F104cC2Ed31Cb719EfD95b9Eb490, supply);
     }
     
     // Token Setup
     string public constant name = "i Trade (Long)";
     string public constant symbol = "ITRLONG";
     uint256 public constant decimals = 5;
-    uint256 public supply = 100000000000000000;
-    address public exchangeContract = address(0);
+    uint256 public supply = 0;
+    address public exchangeContract;
     
     // Burn event
     event Burn(address from, uint256 amount);
@@ -133,7 +131,7 @@ contract Token is IERC20, Owned {
     
     // Exchange Only modifier for minting / burning
     modifier onlyExchange {
-        require(msg.sender == exchangeContract);
+        require(msg.sender == exchangeContract, "This can only be invoked by the exchange contract");
         _;
     }
     
@@ -182,8 +180,8 @@ contract Token is IERC20, Owned {
     
     // Transfer from function, pulls from allowance
     function transferFrom(address from, address to, uint value) public returns (bool success) {
-        require(value <= balanceOf(from));
-        require(value <= allowance(from, msg.sender));
+        require(value <= balanceOf(from), "Token Holder does not have enough balance");
+        require(value <= allowance(from, msg.sender), "Transfer not approved by token holder");
         _balances[from] = _balances[from].sub(value);
         _balances[to] = _balances[to].add(value);
         _allowed[from][msg.sender] = _allowed[from][msg.sender].sub(value);
@@ -191,12 +189,26 @@ contract Token is IERC20, Owned {
         return true;
     }
     
-    
     function burn(uint256 amount) public onlyOwner {
-        require(_balances[msg.sender] >= amount);
+        require(_balances[msg.sender] >= amount, "Not enough balance");
         _balances[msg.sender] = _balances[msg.sender].sub(amount);
         supply = supply.sub(amount);
         emit Transfer(msg.sender, address(0), amount);
         emit Burn(msg.sender, amount);
+    }
+
+    function open(address to, uint256 amount) public onlyExchange {
+		    _balances[to] = _balances[to].add(amount);
+        supply = supply.add(amount);
+        emit Transfer(address(0), to, amount);
+        emit Mint(to, amount);
+    }
+
+    function close(address from, uint256 amount) public onlyExchange {
+		    require(balanceOf(from) >= amount, "Not enough balance");
+		    _balances[from] = _balances[from].sub(amount);
+        supply = supply.sub(amount);
+        emit Transfer(from, address(0), amount);
+        emit Burn(from, amount);
     }
 }

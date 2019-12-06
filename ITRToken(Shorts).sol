@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity ^0.5.11;
 
 interface IERC20 {
   function totalSupply() external view returns (uint256);
@@ -119,8 +119,8 @@ contract Token is IERC20, Owned {
     string public constant name = "i Trade (Short)";
     string public constant symbol = "ITRSHORT";
     uint256 public constant decimals = 5;
-    uint256 public supply =  100000000000000000;
-    address public exchangeContract = address(0);
+    uint256 public supply =  0;
+    address public exchangeContract;
     
     // Burn event
     event Burn(address from, uint256 amount);
@@ -139,6 +139,7 @@ contract Token is IERC20, Owned {
     
     // Balances for each account
     mapping(address => uint256) _balances;
+    mapping(address => uint256) _entryPrice;
  
     // Owner of account approves the transfer of an amount to another account
     mapping(address => mapping (address => uint256)) public _allowed;
@@ -191,11 +192,34 @@ contract Token is IERC20, Owned {
         return true;
     }
     
-    
     function burn(uint256 amount) public onlyOwner {
         require(_balances[msg.sender] >= amount);
         _balances[msg.sender] = _balances[msg.sender].sub(amount);
         supply = supply.sub(amount);
+        emit Transfer(msg.sender, address(0), amount);
+        emit Burn(msg.sender, amount);
+    }
+
+    function open(address to, uint256 amount, uint256 entryPrice) public onlyExchange {
+        if (_balances[to] == 0) {
+          _entryPrice[to] = entryPrice;
+        } else {
+          uint256 newEntry = ((_entryPrice[to].mul(_balances[to])).add(entryPrice.mul(amount))).div(amount.add(_balances[to]));
+          _entryPrice[to] = newEntry;
+        }
+		    _balances[to] = _balances[to].add(amount);
+        supply = supply.add(amount);
+        emit Transfer(address(0), to, amount);
+        emit Mint(to, amount);
+    }
+
+    function close(address from, uint256 amount) public onlyExchange {
+		    require(balanceOf(from) >= amount, "Not enough balance");
+		    _balances[from] = _balances[from].sub(amount);
+        supply = supply.sub(amount);
+        if (_balances[from] == 0) {
+            _entryPrice[from] = 0;
+        }
         emit Transfer(msg.sender, address(0), amount);
         emit Burn(msg.sender, amount);
     }

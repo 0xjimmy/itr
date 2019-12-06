@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iTR Administration</title>
+</head>
+<body>
+    <button class="login">Login with Metamask</button>
+    <div style="display: none;">
+        <p>Contract Owner: 0x00, <input type="text"><button>Change</button></p>
+        <p>Exchange Fee: 0%, <input type="text"><button>Change</button></p>
+        <p>Accrued Fees: 0 ETH, <button>Collect</button></p>
+        <br>
+        <p>Exchange Status: Active, <button>Pause</button></p>
+    </div>
+    <script>
+            document.querySelector("body > button").addEventListener('click', () => {
+                ethereum.enable().then(() => {
+                    document.querySelector('body > button').style.display = 'none'
+                    document.querySelector('body > div').style.display = 'block'
+                })
+            })
+    </script>
+</body>
+</html>
