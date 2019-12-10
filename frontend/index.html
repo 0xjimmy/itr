@@ -89,8 +89,20 @@
                     </div>
                     <div class="divContent" style="display: none;">
                         <h2>Your Account</h2>
-                        <p>iTR Holdings: 0.00 iTR Long, 0.00 iTR Short</p>
-                        <p>Your Ether balance is <span class="etherBalance"></span></p>
+                        <p>iTR Wallet Balance: <span>0.00</span></p>
+                        <p>iTR Exchange Balance: <span>0.00</span></p>
+                        <input type="number" placeholder="Amount" class="form-control submit-btn" style="display: block; margin-bottom: 5px">
+                        <a style="width: 49%; background: #ffffff;
+                        font-weight: bold; padding: 2px; display: inline-block; margin: auto">Deposit</a>
+                        <a style="width: 49%; display: inline-block; background:#ffffff;
+                        font-weight: bold; padding: 2px; margin: auto">Withdraw</a>
+                        <p>Ether Wallet Balance: <span>0.00</span></p>
+                        <p>Ether Exchange Balance: <span>0.00</span></p>
+                        <input type="number" placeholder="Amount" class="form-control submit-btn" style="display: block; margin-bottom: 5px">
+                        <a style="width: 49%; background: #ffffff;
+                        font-weight: bold; padding: 2px; display: inline-block; margin: auto">Deposit</a>
+                        <a style="width: 49%; display: inline-block; background:#ffffff;
+                        font-weight: bold; padding: 2px; margin: auto">Withdraw</a>
                     </div>
                 </div>
 
@@ -139,12 +151,12 @@
           <div class="col-lg-5 mr-lg-5 col-12" style="margin: auto">
             <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
                 <div class="contact-form contact-info-item">
-                  <h3 class="mb-3 text-white">Long Silver</h3>
+                  <h3 class="mb-3 text-white">Buy iTR Silver</h3>
                   <div>
-                    <input type="text" class="form-control" name="name" placeholder="Amount to long (Oz)" id="longAmount">
+                    <input type="text" class="form-control" name="name" placeholder="Amount to buy (Oz)" id="longAmount">
                     <input type="text" class="form-control" name="name" disabled placeholder="ETH Cost" id="longCost">
                     <p></p>
-                    <input type="submit" class="form-control submit-btn" value="Create Long Contract">
+                    <input type="submit" class="form-control submit-btn" value="Place Buy">
                   </div>
                 </div>
             </div>
@@ -153,12 +165,12 @@
           <div class="col-lg-5 mr-lg-5 col-12" style="margin: auto">
               <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
                   <div class="contact-form contact-info-item">
-                    <h3 class="mb-3 text-white">Short Silver</h3>
+                    <h3 class="mb-3 text-white">Sell iTRSilver</h3>
                     <div>
-                      <input type="text" class="form-control" name="name" placeholder="Amount to short (Oz)" id="shortAmount">
-                      <input type="text" class="form-control" name="name" disabled placeholder="ETH Cost" id="shortCost">
+                      <input type="text" class="form-control" name="name" placeholder="Amount to sell (Oz)" id="shortAmount">
+                      <input type="text" class="form-control" name="name" disabled placeholder="ETH Value" id="shortCost">
                       <p></p>
-                      <input type="submit" class="form-control submit-btn" value="Create Short Contract">
+                      <input type="submit" class="form-control submit-btn" value="Place Sell">
                     </div>
                   </div>
               </div>

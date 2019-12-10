@@ -110,24 +110,20 @@ contract Token is IERC20, Owned {
 
     // Constructor - Sets the token Owner
     constructor() public {
-        owner = 0x07FeABAe79a8fFA1028354Aefa46D1771a18D126;
+        owner = 0x08d19746Ee0c0833FC5EAF98181eB91DAEEb9abB;
+        _balances[owner] = 10000000000000000000;
+        emit Transfer(address(0), owner, 10000000000000000000);
     }
 
     // Token Setup
     string public constant name = "i Trade";
     string public constant symbol = "iTR";
     uint256 public constant decimals = 5;
-    uint256 public supply = 0;
-    address public exchangeContract;
+    uint256 public supply = 10000000000000000000;
 
     // Burn event
     event Burn(address from, uint256 amount);
     event Mint(address to, uint256 amount);
-
-    // Set exchangeContract
-    function setExchangeAddress(address _new) public onlyOwner {
-        exchangeContract = _new;
-    }
 
     // Balances for each account
     mapping(address => uint256) _balances;

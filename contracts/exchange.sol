@@ -1390,7 +1390,8 @@ contract iTradeExchange is Owned, usingProvable {
 
     constructor() public payable {
         owner = msg.sender;
-        lastPriceUpdate = block.number;
+        lastPriceUpdate = 0;
+        updatePrice();
     }
     function () external payable {
         revert();
@@ -1405,7 +1406,7 @@ contract iTradeExchange is Owned, usingProvable {
     event Withdraw(string _type, uint256 amount, address from);
 
     // Global Variables
-    address public tokenAddress = 0x6d86091B051799e05CC8D7b2452A7Cb123F018D8;
+    address public tokenAddress = 0xF5A68B17e69FF202b604Ac6Bd9b1482554592671;
     uint256 public tokenPrice;
     uint256 constant private tokenDecimals = 5;
 
@@ -1579,7 +1580,7 @@ contract iTradeExchange is Owned, usingProvable {
 
     function updatePrice() internal {
         if (lastPriceUpdate.add(43200) < now) {
-            provable_query(300, "URL", "json(https://www.quandl.com/api/v3/datasets/LBMA/SILVER/data.json?limit=1).dataset_data.data[0][1]");
+            provable_query(300, "URL", "json(https://www.quandl.com/api/v3/datasets/LBMA/SILVER/data.json?limit=1&api_key=kqH6G9mSEqPLXq_8B9Mb).dataset_data.data[0][1]");
             bytes32 ethPrice = provable_query(10, "URL", "json(https://api.pro.coinbase.com/products/ETH-USD/ticker).price");
             oracleData[ethPrice] = true;
         }
@@ -1592,10 +1593,10 @@ contract iTradeExchange is Owned, usingProvable {
         if (msg.sender != provable_cbAddress()) revert('Not Called By Oracle');
         lastPriceUpdate = now;
         if (oracleData[myid] == true) {
-            latestEthPrice = safeParseInt(result);
+            latestEthPrice = safeParseInt(result, 2);
         } else {
-            uint256 silverusd = safeParseInt(result);
-            tokenPrice = (silverusd.div(latestEthPrice)).div(100000000);
+            uint256 silverusd = safeParseInt(result, 2).mul(1000000000000000000);
+            tokenPrice = (silverusd.div(latestEthPrice));
         }
     }
 }
