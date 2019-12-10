@@ -62,7 +62,13 @@ document.querySelector("#accountPanel > div.divContent > a:nth-child(11)").addEv
 })
 // iTR Deposit & Withdraw
 document.querySelector("#accountPanel > div.divContent > a:nth-child(5)").addEventListener('click', () => {
-
+    web3.eth.contract(tokenABI).at(tokenAddress).approve('0xc5F9412E46026fe82115dF8cbCbBc97D2fF655b9', (document.querySelector("#accountPanel > div.divContent > input:nth-child(4)").value * 100000), (error, result) => {
+        if (!error) {
+            web3.eth.contract(exchangeABI).at(exchangeAddress).depositITR((document.querySelector("#accountPanel > div.divContent > input:nth-child(4)").value * 100000), (error, result) => {
+                console.log(error, result)
+            })
+        }
+    })
 })
 document.querySelector("#accountPanel > div.divContent > a:nth-child(6)").addEventListener('click', () => {
     web3.eth.contract(exchangeABI).at(exchangeAddress).withdrawITR((document.querySelector("#accountPanel > div.divContent > input:nth-child(4)").value / 100000), (error, result) => {
