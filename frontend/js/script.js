@@ -81,6 +81,7 @@ document.querySelector("#contact > div > div > div:nth-child(1) > div > div > di
     var buyAmount;
     var tokenPrice;
     var usedOrders;
+    let exchange = web3.eth.contract(exchangeABI).at(exchangeAddress);
     var orderLength;
     function toEth(amount) {
         return Math.trunc((amount * tokenPrice) / (10 ** tokenDecimals));
@@ -149,6 +150,7 @@ document.querySelector("#contact > div > div > div:nth-child(2) > div > div > di
     var tokenPrice;
     var usedOrders;
     var orderLength;
+    let exchange = web3.eth.contract(exchangeABI).at(exchangeAddress);
     function toEth(amount) {
         return Math.trunc((amount * tokenPrice) / (10 ** tokenDecimals));
     }
